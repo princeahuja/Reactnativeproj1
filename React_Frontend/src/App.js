@@ -71,6 +71,8 @@ render() {
   <button className="btn btn-success" style={{margin:'15px',width:'100px'}}
   onClick={this.klikGet.bind(this)}>GET</button>
 
+  <p>Our first app!!!</p>
+
 </form>
 
      <div>
