@@ -1,21 +1,21 @@
-var express = require('express');
+var express = require('express'); //api node sugar coat
 var app = express();
-var bodyParser = require('body-parser');
-var cors = require('cors');
+var bodyParser = require('body-parser'); // get / post data rest api res.body
+var cors = require('cors'); // cross oringe reuest
 app.use(cors());
 app.use(bodyParser.json());
 var mongo = require('mongodb').MongoClient;
 var url = 'mongodb://jitender:jitender@localhost:27017/dojo';
 
 mongo.connect(url, (err)=>{
-    console.log('Terhubung ke database!')
+    console.log('Mongoddb connected!!!!!')
 })
 
 app.get('/data', (req, res)=>{
     mongo.connect(url, (err, db)=>{
         var collection = db.collection('ninja');
-        collection.find({}).toArray((x, hasil)=>{
-            res.send(hasil);
+        collection.find({}).toArray((x, result)=>{
+            res.send(result);
         })
     })
 })
@@ -23,16 +23,16 @@ app.get('/data', (req, res)=>{
 app.post('/data', (req, res)=>{
     mongo.connect(url, (err, db)=>{
         var collection = db.collection('ninja');
-        var sesuatu = {
+        var sendBOdy = {
             nama: req.body.nama,
             usia: req.body.usia
         }
-        collection.insert(sesuatu, (x, hasil)=>{
-            res.send(hasil);
+        collection.insert(sendBOdy, (x, result)=>{
+            res.send(result);
         })
     })
 })
 
 app.listen(3210, ()=>{
-    console.log('Server aktif @port 3210!');
+    console.log('Server connected to @port 3210!');
 })
